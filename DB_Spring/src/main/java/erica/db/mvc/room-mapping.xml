@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="room">
+	<!-- Select all room record -->
+	<select id="allroom" resultType="room">
+		SELECT * 
+		FROM room
+	</select>
+	
+	<!-- Select one room record -->
+	<select id="oneroom" resultType="room" parameterType="room">
+		SELECT * 
+		FROM room 
+		WHERE roomno = #{roomno}
+	</select>
+	
+	<!-- Insert room record -->
+	<insert id="insertroom" parameterType="room">
+		INSERT INTO room 
+		VALUES(room_seq.nextval, #{type}, #{person}, #{tow}, #{bed}, #{amenity})
+	</insert>
+	
+	<!-- Update room record -->
+	<update id="updateroom" parameterType="room">
+		UPDATE room 
+		SET type = #{type}, person = #{person}, tow = #{tow}, bed = #{bed}, amenity = #{amenity} 
+		WHERE roomno = #{roomno}
+	</update>
+	
+	<!-- Delete room record -->
+	<delete id="deleteroom" parameterType="room">
+		DELETE FROM room
+		WHERE roomno = #{roomno}
+	</delete>
+</mapper>

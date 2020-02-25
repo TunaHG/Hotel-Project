@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<typeAliases>
+		<typeAlias type="erica.db.mvc.MemberVO" alias="member"/>
+		<typeAlias type="eriac.db.mvc.PayVO" alias="pay"/>
+		<typeAlias type="eriac.db.mvc.RequestVO" alias="request"/>
+		<typeAlias type="eriac.db.mvc.RoomVO" alias="room"/>
+	</typeAliases>
+	<environments default="mydb">
+		<environment id="mydb">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name="username" value="ericadb"/>
+				<property name="password" value="erica"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="eriac.db.mvc.member-mapping.xml"/>
+		<mapper resource="eriac.db.mvc.pay-mapping.xml"/>
+		<mapper resource="eriac.db.mvc.request-mapping.xml"/>
+		<mapper resource="eriac.db.mvc.room-mapping.xml"/>
+	</mappers>
+</configuration>

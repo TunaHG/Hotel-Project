@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="request">
+	<!-- Select all reqeust record -->
+	<select id="allrequest" resultType="request">
+		SELECT * 
+		FROM request
+	</select>
+	
+	<!-- Select one request record -->
+	<select id="onerequest" resultType="request" parameterType="request">
+		SELECT * 
+		FROM request 
+		WHERE reqno = #{reqno}
+	</select>
+	
+	<!-- Insert request record -->
+	<insert id="insertrequest" parameterType="request">
+		INSERT INTO request
+		VALUES(request_seq, #{roomno}, #{content}, #{ing}, #{memberno}, sysdate)
+	</insert>
+	
+	<!-- Update request record -->
+	<update id="updaterequest">
+		UPDATE request 
+		SET roomno = #{roomno}, content = #{content}, memberno = #{memberno}, ing = #{ing} 
+		WHERE reqno = #{reqno}
+	</update>
+	
+	<!-- Delete request record -->
+	<delete id="deleterequest">
+		DELETE FROM request
+		WHERE reqno = #{reqno}
+	</delete>
+</mapper>
