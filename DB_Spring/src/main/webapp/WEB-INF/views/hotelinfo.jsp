@@ -8,8 +8,8 @@
     	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/owl.carousel.css">
     	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
-    	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/owl.transitions.css">
-    	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/owl.theme.css">
+    	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/owl.transitions.css">
+    	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/owl.theme.css">
     	<title>The Uijo Hotel - Hotel Info</title>
     	<style>
     
@@ -31,6 +31,11 @@
 				0 0 0 3px rgba(75,154,191,0,9) inset,
 				0 0 0 100px rgba(0,0,0,0.1) inset;
 			}
+      		.menu{}
+			.menu li{position:relative;}
+			.menu li a{font-size:16px; text-transform:uppercase; color:#878787; border-bottom:1px solid #dbdbdb; padding: 10px; display:block; transition:all .3s ease;}
+			.menu li a:hover {color: #333;}
+			.menu li a i{position:absolute; right:10px; top:15px;}
 	  
   	    	#jb-container {
   	    		width: 1280px;
@@ -42,16 +47,17 @@
         		margin-bottom: 50px;
 			}
       		#jb-content {
-        		width: 1239px;
+        		width: 900px;
         		padding: 20px;
         		margin-bottom: 20px;
-        		float: center;
+        		float: right;
         		font-family: 'Nanum Gothic Coding', monospace;
-        		font-size:18px;
+        		font-size:15px;
+        		border-left:1px solid #dbdbdb;
       		}
       		#jb-sidebar {
         		width: 260px;
-        		height: 1484px;
+        		height: 1000px;
         		padding: 20px;
         		margin-bottom: 20px;
         		float: left;
@@ -70,11 +76,6 @@
         		clear: both;
         		text-align:center; padding:30px 50px;
       		}
-      		.menu{}
-			.menu li{position:relative;}
-			.menu li a{font-size:16px; text-transform:uppercase; color:#878787; border-bottom:1px solid #dbdbdb; padding: 10px; display:block; transition:all .3s ease;}
-			.menu li a:hover {color: #333;}
-			.menu li a i{position:absolute; right:10px; top:15px;}
     	</style>
 	</head>
   	<body>
@@ -83,7 +84,6 @@
 				<div class="row">	
 					<div class="quick">
 						<a href="<%=request.getContextPath()%>/hotelinfo">호텔소개</a>
-						<a href="#">예약<i class="far fa-calendar-alt"></i></a>
 						<%if(session.getAttribute("member") == null){ %>
 						<a href="<%=request.getContextPath()%>/login">로그인</a>
 						<%} else { %>
@@ -101,7 +101,7 @@
       			<h2>The Uijo Hotel</h2>
       			<p class="desc"></p>
   				<div class="img1">
-  					<img src="<%=request.getContextPath()%>/resources/pbl2.jpg" alt="이미지" style="width:870px; height:450px;">
+  					<img src="<%=request.getContextPath()%>/resources/images/pbl2.jpg" alt="이미지" style="width:870px; height:450px;">
   				</div><br>
   				<h2>The Best Hospitality Company</h2>
   				<p class="desc"></p>

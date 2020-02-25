@@ -22,8 +22,8 @@ public class HomeController {
 		return "hotelinfo";
 	}
 	
-	@RequestMapping("/managerinfo")
-	public String managerinfo() {
-		return "managerinfo";
+	@RequestMapping("/staffinfo")
+	public String staffinfo() {
+		return "staffinfo";
 	}
 }

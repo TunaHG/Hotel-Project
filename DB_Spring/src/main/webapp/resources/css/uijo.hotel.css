@@ -33,7 +33,7 @@ body .container .half {
 }
 
 body .container .half.bg {
-	background-image: url(/resources/images/pbl2.jpg);
+	background-image: url(resources/images/pbl2.jpg);
 	background-size: 400px;
 	background-repeat: no-repeat;
 }

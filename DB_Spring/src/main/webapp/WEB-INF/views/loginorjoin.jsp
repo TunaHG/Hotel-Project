@@ -15,21 +15,32 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/owl.theme.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/uijo.hotel.css">
 <title>Login Or Join</title>
+<style>
+	body{background:url(resources/images/travel-3135436_640.jpg) repeat-x center top;}
+	body .container .half.bg {
+		background-image: url(resources/images/pbl2.jpg);
+		background-size: 400px;
+		background-repeat: no-repeat;
+	}
+</style>
 </head>
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
 			<div class="row">
 				<div class="quick">
-					<a href="<%=request.getContextPath()%>/hotelinfo">호텔소개</a> 
-					<a href="#">예약<i class="far fa-calendar-alt"></i></a> 
-					<a href="<%=request.getContextPath()%>/login">로그인</a> 
+					<a href="<%=request.getContextPath()%>/hotelinfo">호텔소개</a>
+					<%if(session.getAttribute("member") == null){ %>
+					<a href="<%=request.getContextPath()%>/login">로그인</a>
+					<%} else { %>
+					<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
+					<%} %>
 					<a href="<%=request.getContextPath()%>/join">회원가입</a>
 				</div>
 				<div class="title">
 					<p>The Uijo Hotel</p>
 					<h1>
-						<a href="main.jsp">theuijo.co.kr</a>
+						<a href="<%=request.getContextPath()%>/">theuijo.co.kr</a>
 					</h1>
 				</div>
 			</div>
@@ -45,8 +56,8 @@
 			<div class="content">
 				<div class="signin-cont cont">
 					<form action="<%=request.getContextPath()%>/login" method="post">
-						<label for="email">Your email</label>
-							<input type="text" name="email" id="email" class="inpt" required="required" placeholder="Your email"> 
+						<label for="memberid">Your ID</label>
+							<input type="text" name="memberid" id="memberid" class="inpt" required="required" placeholder="Your id"> 
 						<label for="password">Your password</label>
 							<input type="password" name="password" id="password" class="inpt" required="required" placeholder="Your password"> 
 						<div class="submit-wrap">
@@ -57,10 +68,10 @@
 				</div>
 				<div class="signup-cont cont">
 					<form action="<%=request.getContextPath()%>/join" method="post">
+						<label for="memberid">Your ID</label> 
+							<input type="text" name="memberid" id="memberid" class="inpt" required="required" placeholder="Your id"> 
 						<label for="name">Your name</label> 
 							<input type="text" name="name" id="name" class="inpt" required="required" placeholder="Your name"> 
-						<label for="email">Your email</label> 
-							<input type="email" name="email" id="email" class="inpt" required="required" placeholder="Your email"> 
 						<label for="password">Your password</label> 
 							<input type="password" name="password" id="password" class="inpt" required="required" placeholder="Your password">
 						<label for="phone">Your phone</label> 

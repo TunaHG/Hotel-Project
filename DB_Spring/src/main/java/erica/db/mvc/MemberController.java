@@ -1,6 +1,10 @@
 package erica.db.mvc;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +29,26 @@ public class MemberController {
 	
 	// Login 처리 진행
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView loginProcess(HttpServletRequest request, MemberVO vo) {
+	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response, MemberVO vo) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session;
 		
 		// 로그인의 결과값 
-		MemberVO result = dao.login(vo);
+		MemberVO result = dao.loginMember(vo);
 		mv.addObject("result", result);
 		
 		// result값이 null이면 해당 값이 존재하지 않으므로 로그인 실패
 		if(result == null) {
+			try {
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('로그인에 실패했습니다.')");
+				script.println("</script>");
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 			System.out.println("Controller:\tLogin Fail, Record is not exist.");
-			mv.setViewName("loginfail");
+			mv.setViewName("loginorjoin");
 		}
 		// result값이 존재하면 member table에 값이 존재함
 		else {
@@ -45,7 +57,7 @@ public class MemberController {
 			session.setAttribute("member", result);
 			
 			// Staff라면, 메인사이트가 아닌 호텔 관리 사이트로 이동
-			if(result.getStaff().equals("staff")) {
+			if(result.getStaff().equals("Staff") || result.getStaff().equals("admin")) {
 				System.out.println("Controller:\tStaff Login Success!");
 				mv.setViewName("staffmain");
 			}
@@ -79,12 +91,29 @@ public class MemberController {
 	
 	// Join 처리 진행
 	@RequestMapping(value = "join", method = RequestMethod.POST)
-	public String joinProcess(MemberVO vo) {
-		// DAO Join 처리
-		dao.join(vo);
-		System.out.println("Controller:\tJoin Success!");
+	public String joinProcess(HttpServletResponse response ,MemberVO vo) {
+		// MemberID, Phone 중복 체크
+		int check = dao.checkJoin(vo);
 		
-		// Login 페이지 호출
+		// 0이 아니라면 중복된 값이 있다는 의미. 가입을 안하고 회원가입창으로 돌려보낸다.
+		if(check != 0) {
+			System.out.println("Controller:\tJoin Fail.");
+			try {
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('회원가입에 실패했습니다.\n중복된 아이디 혹은 전화번호입니다.')");
+				script.println("</script>");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 0이라면 중복된 값이 없으므로 가입을 진행한 후 로그인창으로 돌려보낸다.
+		else {
+			// DAO Join 처리
+			dao.joinMember(vo);
+			System.out.println("Controller:\tJoin Success!");
+		}
+		// Login or Join 페이지 호출
 		return "loginorjoin";
 	}
 	
@@ -98,11 +127,68 @@ public class MemberController {
 		
 		// Session이 없다면 접근 유저가 Staff인지 아닌지 모르므로 Login창을 호출
 		if(session == null) {
+			System.out.println("Controller:\tWrong Staff Session");
 			return "redirect:/login";
 		}
 		// Session이 있다면 해당 메소드로 접근하는 유저는 모두 Staff이므로 그대로 staffmain 페이지 호출
 		else {
+			System.out.println("Controller:\tRight Staff Session");
 			return "staffmain";
 		}
+	}
+	
+	// Staff Page 관리 부분
+	// Client List 호출
+	@RequestMapping("staffclient")
+	public ModelAndView client() {
+		// ModelAndView 객체 생성
+		ModelAndView mv = new ModelAndView();
+		// 모든 Client를 List<>를 사용하여 가져옴
+		List<MemberVO> list = dao.getAllClient();
+		System.out.println("Controller:\tGet All Client data");
+		
+		// 가져온 모든 Client를 Model로 넘겨줌
+		mv.addObject("list", list);
+		// View 지정
+		mv.setViewName("staffclient");
+		System.out.println("Controller:\tPrint All Client data");
+		
+		return mv;
+	}
+	
+	// Client Data Update Form
+	@RequestMapping(value = "/updateclient", method = RequestMethod.GET)
+	public ModelAndView updateClientForm(String memberid) {
+		ModelAndView mv = new ModelAndView();
+		// Client의 정보를 가져옴
+		MemberVO vo = dao.getOneClient(memberid);
+		System.out.println("Controller:\tGet One Client data");
+		
+		// 가져온 Client 정보를 Model로 넘겨줌
+		mv.addObject("vo", vo);
+		// View 지정
+		mv.setViewName("clientupdateform");
+		System.out.println("Controller:\tPrint Client data to Update Form");
+		
+		return mv;
+	}
+	
+	// Client Data Update
+	@RequestMapping(value = "/updateclient", method = RequestMethod.POST)
+	public String updateClient(HttpServletResponse response, MemberVO vo) {
+		// DAO Join 처리
+		dao.updateMember(vo);
+		System.out.println("Controller:\tUpdate Client Success!");
+		
+		// Staff Client 창으로 돌려보낸다.
+		return "redirect:/staffclient";
+	}
+	
+	// Client Data Delete
+	@RequestMapping("/deleteclient")
+	public String deleteClient(String memberid) {
+		dao.deleteMember(memberid);
+		System.out.println("Controller:\tDelete Client Success!");
+		return "redirect:/staffclient";
 	}
 }

@@ -6,38 +6,53 @@
 	<select id="loginmember" resultType="member" parameterType="member">
 		SELECT *
 		FROM member 
-		WHERE email = #{email} and password = #{password}
+		WHERE memberid = #{memberid} and password = #{password}
 	</select>
 	
-	<!-- Select all members -->
-	<select id="allmember" resultType="member">
+	<!-- Select all clients -->
+	<select id="allclient" resultType="member">
 		SELECT * 
 		FROM member
+		WHERE staff = 'Client'
+	</select>
+	
+	<!-- Select all staffs -->
+	<select id="allstaff" resultType="member">
+		SELECT * 
+		FROM member
+		WHERE staff = 'Staff'
 	</select>
 	
 	<!-- Select one member -->
-	<select id="onemember" resultType="member" parameterType="member">
+	<select id="onemember" resultType="member" parameterType="String">
 		SELECT * 
 		FROM member 
-		WHERE memberno = #{memberno}
+		WHERE memberid = #{memberid}
+	</select>
+	
+	<!-- MemberID, Phone duplication check -->
+	<select id="checkjoin" resultType="int" parameterType="member">
+		SELECT count(*)
+		FROM member
+		WHERE memberid = #{memberid}
 	</select>
 	
 	<!-- Insert member record -->
 	<insert id="insertmember" parameterType="member">
 		INSERT INTO member 
-		VALUES(member_seq.nextval, #{name}, #{email}, #{password}, #{phone}, #{age}, #{sex}, 'Client', sysdate)
+		VALUES(#{memberid}, #{name}, #{password}, #{phone}, #{age}, #{sex}, 'Client', sysdate)
 	</insert>
 	
 	<!-- Update member record -->
 	<update id="updatemember" parameterType="member">
 		UPDATE member 
-		SET name = #{name}, email = #{email}, password = #{password}, phone = #{phone}, age = #{age}, sex = #{sex} 
-		WHERE memberno = #{memberno}
+		SET name = #{name}, password = #{password}, phone = #{phone}, age = #{age}, sex = #{sex} 
+		WHERE memberid = #{memberid}
 	</update>
 	
 	<!-- Delete member record -->
-	<delete id="deletemember" parameterType="member">
+	<delete id="deletemember" parameterType="String">
 		DELETE FROM member 
-		WHERE memberno = #{memberno}
+		WHERE memberid = #{memberid}
 	</delete>
 </mapper>

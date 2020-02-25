@@ -3,9 +3,8 @@ package erica.db.mvc;
 import java.sql.Timestamp;
 
 public class MemberVO {
-	private int memberno;
+	private String memberid;
 	private String name;
-	private String email;
 	private String password;
 	private String phone;
 	private int age;
@@ -13,23 +12,17 @@ public class MemberVO {
 	private String staff;
 	private Timestamp reg_date;
 	
-	public int getMemberno() {
-		return memberno;
+	public String getMemberid() {
+		return memberid;
 	}
-	public void setMemberno(int memberno) {
-		this.memberno = memberno;
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
 	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public String getPassword() {
 		return password;
