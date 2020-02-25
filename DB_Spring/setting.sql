@@ -12,7 +12,7 @@ create table member(
     password varchar2(20),
     phone varchar2(15) unique,
     age number(3),
-    sex varchar2(5),
+    sex varchar2(10),
     staff varchar2(10) default 'user',
     reg_date date
 );

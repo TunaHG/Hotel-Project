@@ -15,14 +15,11 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="configLocation" value="classpath:/erica/db/mvc/mybatis-config.xml"/>
-		<property name="mapperLocations" value="classpath:/erica/db/mvc/member-mapping.xml"/>
-		<property name="mapperLocations" value="classpath:/erica/db/mvc/pay-mapping.xml"/>
-		<property name="mapperLocations" value="classpath:/erica/db/mvc/request-mapping.xml"/>
-		<property name="mapperLocations" value="classpath:/erica/db/mvc/room-mapping.xml"/>
+		<property name="mapperLocations" value="classpath:/erica/db/mvc/*-mapping.xml"/>
 	</bean>
 
 	<!-- 3. SqlSessionTemplate (Spring api) 생성 = mybatis SqlSession -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSessionFactory"/>
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 </beans>

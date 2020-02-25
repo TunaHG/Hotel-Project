@@ -85,11 +85,11 @@
 						<a href="<%=request.getContextPath()%>/hotelinfo">호텔소개</a>
 						<a href="#">예약<i class="far fa-calendar-alt"></i></a>
 						<%if(session.getAttribute("member") == null){ %>
-						<a href="<%=request.getContextPath()%>/">로그인</a>
+						<a href="<%=request.getContextPath()%>/login">로그인</a>
 						<%} else { %>
-						<a href="<%=request.getContextPath()%>/">로그아웃</a>
+						<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
 						<%} %>
-						<a href="<%=request.getContextPath()%>/">회원가입</a>
+						<a href="<%=request.getContextPath()%>/join">회원가입</a>
 					</div>
 					<div class="title">
 						<p>The Uijo Hotel</p>

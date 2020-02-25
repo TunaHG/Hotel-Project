@@ -10,8 +10,16 @@ public class MemberDAO {
 	SqlSession session;
 	
 	// Login
-	public int login(MemberVO vo) {
-		int result = session.selectOne("loginmember", vo);
+	public MemberVO login(MemberVO vo) {
+		MemberVO result = session.selectOne("loginmember", vo);
+		System.out.println("DAO:\tLogin Member Success!");
 		return result;
+	}
+	
+	// Join
+	public void join(MemberVO vo) {
+		// Staff의 Default값인 Client로 Join
+		session.insert("insertmember", vo);
+		System.out.println("DAO:\tInsert Member Success!");
 	}
 }

@@ -66,11 +66,11 @@
 						<a href="<%=request.getContextPath()%>/hotelinfo">호텔소개</a>
 						<a href="#">예약<i class="far fa-calendar-alt"></i></a>
 						<%if(session.getAttribute("member") == null){ %>
-						<a href="<%=request.getContextPath()%>/">로그인</a>
+						<a href="<%=request.getContextPath()%>/login">로그인</a>
 						<%} else { %>
-						<a href="<%=request.getContextPath()%>/">로그아웃</a>
+						<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
 						<%} %>
-						<a href="<%=request.getContextPath()%>/">회원가입</a>
+						<a href="<%=request.getContextPath()%>/join">회원가입</a>
 					</div>
 					<div class="title">
 						<p>The Uijo Hotel</p>
@@ -104,9 +104,10 @@
 					All Rights Reserved.</em>
 				</address>
       		</div>
-      		<div class="rsvBar">
+      		<!-- 추후 예약 구현시 주석처리 해제하고 사용할 부분 -->
+      		<!-- <div class="rsvBar">
 				<div class="rsvBarContent">
-					<!--checkIn   : year,month,day // list -->
+					checkIn   : year,month,day // list
 					<span class="date_select">
 						<select class="selectBox" id="in_year" onchange="addMonth('in')">
 							<option value="2018">2018</option>
@@ -124,7 +125,7 @@
 						</select>
 					</span>
 				
-					<!--checkOut  : year,month,day // list -->
+					checkOut  : year,month,day // list
 					<span class="date_select">
 						<select class="selectBox" id="out_year" onchange="addMonth('out')">
 							<option value="2018">2018</option>
@@ -141,7 +142,7 @@
 						</select>
 					</span>
 				
-					<!--peopleNum : adult, child   // list -->
+					peopleNum : adult, child   // list
 					<span class="peopleNum_select">
 						<select class="selectBox" name="people" id="adlt_select">
 							<option value="0">adult</option>
@@ -159,10 +160,10 @@
 						</select>
 					</span>
 				
-					<!-- check button -->
+					check button
 					<button style="width:80px; height:40px; margin:10px;" onclick="addReservation()">search</button>
 				</div>
-			</div>
+			</div> -->
     	</div>
     	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="<%=request.getContextPath()%>/resources/js/owl.carousel.min.js"></script>
