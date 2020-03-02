@@ -157,38 +157,93 @@ public class MemberController {
 	}
 	
 	// Client Data Update Form
-	@RequestMapping(value = "/updateclient", method = RequestMethod.GET)
+	@RequestMapping(value = "/updatemember", method = RequestMethod.GET)
 	public ModelAndView updateClientForm(String memberid) {
 		ModelAndView mv = new ModelAndView();
 		// Client의 정보를 가져옴
-		MemberVO vo = dao.getOneClient(memberid);
-		System.out.println("Controller:\tGet One Client data");
+		MemberVO vo = dao.getOneMember(memberid);
+		System.out.println("Controller:\tGet One Member data");
 		
 		// 가져온 Client 정보를 Model로 넘겨줌
 		mv.addObject("vo", vo);
 		// View 지정
-		mv.setViewName("clientupdateform");
-		System.out.println("Controller:\tPrint Client data to Update Form");
+		mv.setViewName("memberupdateform");
+		System.out.println("Controller:\tPrint Member data to Update Form");
 		
 		return mv;
 	}
 	
 	// Client Data Update
-	@RequestMapping(value = "/updateclient", method = RequestMethod.POST)
-	public String updateClient(HttpServletResponse response, MemberVO vo) {
+	@RequestMapping(value = "/updatemember", method = RequestMethod.POST)
+	public String updateClient(MemberVO vo) {
 		// DAO Join 처리
 		dao.updateMember(vo);
-		System.out.println("Controller:\tUpdate Client Success!");
+		System.out.println("Controller:\tUpdate Member Success!");
 		
-		// Staff Client 창으로 돌려보낸다.
+		// Staff인지 Client인지에 대한 다른 View 지정
+		if(vo.getStaff().equals("Client")) {
+			System.out.println("Controller:\tClient Data Update");
+			return "redirect:/staffclient";
+		} else {
+			System.out.println("Controller:\tStaff Data Update");
+			return "redirect:/staff";
+		}
+	}
+	
+	// Member Data Delete
+	@RequestMapping("/deletemember")
+	public String deleteMember(String memberid) {
+		// View를 지정하기 위한 해당 MemberID의 객체 생성
+		MemberVO vo = dao.getOneMember(memberid);
+		
+		// Delete 진행
+		dao.deleteMember(memberid);
+		System.out.println("Controller:\tDelete Member Success!");
+		
+		// Staff에 따른 View지정
+		if(vo.getStaff().equals("Client")) {
+			return "redirect:/staffclient";
+		} else {
+			return "redirect:/staff";
+		}
+	}
+	
+	// Staff List 호출
+	@RequestMapping("staff")
+	public ModelAndView staff() {
+		ModelAndView mv = new ModelAndView();
+		// 모든 Staff Data를 List<>로 가져옴
+		List<MemberVO> list = dao.getAllStaff();
+		System.out.println("Controller:\tGet All Staff data");
+		
+		// 가져온 Staff Data를 Model로 넘겨줌
+		mv.addObject("list", list);
+		// View 지정
+		mv.setViewName("staff");
+		System.out.println("Controller:\tPrint All Staff data");
+		
+		return mv;
+	}
+	
+	// Update Client To Staff
+	@RequestMapping("tostaff")
+	public String toStaff(String memberid) {
+		dao.updateToStaff(memberid);
+		System.out.println("Controller:\tUpdate Client To Staff");
+		return "redirect:/staff";
+	}
+	
+	// Update Staff To Client
+	@RequestMapping("toclient")
+	public String toClient(String memberid) {
+		dao.updateToClient(memberid);
+		System.out.println("Controller:\tUpdate Staff To Client");
 		return "redirect:/staffclient";
 	}
 	
-	// Client Data Delete
-	@RequestMapping("/deleteclient")
-	public String deleteClient(String memberid) {
-		dao.deleteMember(memberid);
-		System.out.println("Controller:\tDelete Client Success!");
-		return "redirect:/staffclient";
+	// Print Staff Hotel Page
+	@RequestMapping("staffhotel")
+	public String hotel() {
+		return "staffhotel";
 	}
 }

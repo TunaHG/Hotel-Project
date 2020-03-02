@@ -16,7 +16,7 @@ create table member(
     phone varchar2(15),
     age number(5),
     sex varchar2(20),
-    staff varchar2(20) default 'user',
+    staff varchar2(20) default 'Client',
     reg_date date
 );
 
@@ -38,7 +38,9 @@ create table pay(
 drop sequence pay_seq;
 create sequence pay_seq;
 
-insert into pay values();
+insert into pay values(pay_seq.nextval, '010-0000-0001', '체크아웃 연장', 20000, 'user003', sysdate);
+insert into pay values(pay_seq.nextval, '010-0000-0002', '냉장고 음료 구매', 10000, 'user003', sysdate);
+insert into pay values(pay_seq.nextval, '010-0000-0002', 'TV서비스 구매', 15000, 'user004', sysdate);
 
 create table room(
     roomno number(6) constraint pk_room primary key,
@@ -49,10 +51,12 @@ create table room(
     amenity varchar2(50)
 );
 
-drop sequence room_seq;
-create sequence room_seq;
-
-insert into room values();
+insert into room values(101, 'Standard', 1, 2, 1, 'Shampoo, BodyWash, etc');
+insert into room values(102, 'Standard', 2, 4, 2, 'Shampoo, BodyWash, etc');
+insert into room values(103, 'Standard', 4, 8, 4, 'Shampoo, BodyWash, etc');
+insert into room values(201, 'Superior', 1, 2, 1, 'Shampoo, BodyWash, etc');
+insert into room values(202, 'Superior', 2, 4, 2, 'Shampoo, BodyWash, etc');
+insert into room values(203, 'Superior', 4, 8, 4, 'Shampoo, BodyWash, etc');
 
 create table request(
     reqno number(6) constraint pk_request primary key,
@@ -66,6 +70,9 @@ create table request(
 drop sequence request_seq;
 create sequence request_seq;
 
-insert into request values();
+insert into request values(request_seq.nextval, 101, '타올좀 하나 더주세요', '완료', 'user003', sysdate);
+insert into request values(request_seq.nextval, 103, '방 청소좀 깔끔히 해주세요', '진행중', 'user004', sysdate);
+insert into request values(request_seq.nextval, 202, '체크아웃 시간을 연장하겠습니다.', '접수', 'user003', sysdate);
+insert into request values(request_seq.nextval, 201, '방 앞 복도에 물기좀 닦아주세요', '진행중', 'user003', sysdate);
 
 commit;

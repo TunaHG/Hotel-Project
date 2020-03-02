@@ -39,8 +39,8 @@
 	<div class="menu">
 		<ul class="nav nav-tabs">
 			<li role="presentation"><a href="<%=request.getContextPath()%>/staffmain">메인</a></li>
-			<li role="presentation" class="active"><a href="<%=request.getContextPath()%>/staffclient">고객관리</a></li>
-			<li role="presentation"><a href="<%=request.getContextPath()%>/staff">직원관리</a></li>
+			<li role="presentation"><a href="<%=request.getContextPath()%>/staffclient">고객관리</a></li>
+			<li role="presentation" class="active"><a href="<%=request.getContextPath()%>/staff">직원관리</a></li>
 			<li role="presentation"><a href="<%=request.getContextPath()%>/staffroom">객실관리</a></li>
 			<li role="presentation"><a href="<%=request.getContextPath()%>/staffrequest">요청관리</a></li>
 			<li role="presentation"><a href="<%=request.getContextPath()%>/staffpay">결제관리</a></li>
@@ -60,17 +60,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list}" var="client">
+			<c:forEach items="${list}" var="staff">
 				<tr>
-					<td>${client.memberid}</td>
-					<td>${client.name}</td>
-					<td>${client.phone}</td>
-					<td>${client.age}</td>
-					<td>${client.sex}</td>
-					<td>${client.reg_date}</td>
-					<td><a href="<%=request.getContextPath()%>/updatemember?memberid=${client.memberid}">수정</a></td>
-					<td><a href="<%=request.getContextPath()%>/deletemember?memberid=${client.memberid}">탈퇴</a></td>
-					<td><a href="<%=request.getContextPath()%>/tostaff?memberid=${client.memberid}">직원으로변경</a></td>
+					<td>${staff.memberid}</td>
+					<td>${staff.name}</td>
+					<td>${staff.phone}</td>
+					<td>${staff.age}</td>
+					<td>${staff.sex}</td>
+					<td>${staff.reg_date}</td>
+					<td><a href="<%=request.getContextPath()%>/updatemember?memberid=${staff.memberid}">수정</a></td>
+					<td><a href="<%=request.getContextPath()%>/deletemember?memberid=${staff.memberid}">탈퇴</a></td>
+					<td><a href="<%=request.getContextPath()%>/toclient?memberid=${staff.memberid}">회원으로변경</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

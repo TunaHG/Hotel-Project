@@ -34,10 +34,17 @@ public class MemberDAO {
 		return list;
 	}
 	
-	// One Client
-	public MemberVO getOneClient(String memberid) {
+	// All Staff
+	public List<MemberVO> getAllStaff(){
+		List<MemberVO> list = session.selectList("allstaff");
+		System.out.println("DAO:\tSelect All Staff");
+		return list;
+	}
+	
+	// One Member
+	public MemberVO getOneMember(String memberid) {
 		MemberVO vo = session.selectOne("onemember", memberid);
-		System.out.println("DAO:\tSelect One Client");
+		System.out.println("DAO:\tSelect One Member");
 		return vo;
 	}
 	
@@ -58,5 +65,17 @@ public class MemberDAO {
 	public void deleteMember(String memberid) {
 		session.delete("deletemember", memberid);
 		System.out.println("DAO:\tDelete Member Data");
+	}
+	
+	// Update Client to Staff
+	public void updateToStaff(String memberid) {
+		session.update("tostaff", memberid);
+		System.out.println("DAO:\tUpdate Client To Staff");
+	}
+	
+	// Update Staff to Client
+	public void updateToClient(String memberid) {
+		session.update("toclient", memberid);
+		System.out.println("DAO:\tUpdate Staff To Client");
 	}
 }

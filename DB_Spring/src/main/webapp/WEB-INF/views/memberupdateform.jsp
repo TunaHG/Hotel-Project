@@ -44,8 +44,9 @@
 			</div>
 			<div class="content">
 				<div class="signin-cont cont">
-					<form action="<%=request.getContextPath()%>/updateclient" method="post">
+					<form action="<%=request.getContextPath()%>/updatemember" method="post">
              				<input type="hidden" name="memberid" value="${vo.memberid}">
+             				<input type="hidden" name="staff" value="${vo.staff}">
 	                    <label for="name">Your name</label>
 			   				<input type="text" name="name" id="name" class="inpt" required="required" value="${vo.name}">
     				    <label for="password">Your password</label>
