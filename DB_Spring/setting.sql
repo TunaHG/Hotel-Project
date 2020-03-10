@@ -62,7 +62,7 @@ create table request(
     reqno number(6) constraint pk_request primary key,
     roomno number(6) constraint fk_requestroom references room,
     content varchar2(200),
-    ing varchar2(30),
+    ing varchar2(30) default '접수',
     memberid varchar2(30) constraint fk_requestmember references member,
     reg_date date
 );

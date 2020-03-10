@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding"
 	rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/uijo.hotel.css">
-<title>Update Client</title>
+<title>My Page</title>
 <style>
 	body{background:url(resources/images/travel-3135436_640.jpg) repeat-x center top;}
 	body .container .half.bg {
@@ -31,7 +31,7 @@
 					<%if(session.getAttribute("member") == null){ %>
 					<a href="<%=request.getContextPath()%>/login">로그인</a>
 					<%} else { %>
-					<a href="<%=request.getContextPath()%>/mypage">마이페이지</a>
+					<a href="<%=request.getContextPath()%>/mypage?memberid=${member.memberid}">마이페이지</a>
 					<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
 					<%} %>
 				</div>
@@ -48,33 +48,24 @@
 		<article class="half">
 			<h1>UIJO</h1>
 			<div class="tabs">
-				<span class="tab signin active">Update Member</span>
+				<span class="tab signin active">Info</span>
 			</div>
 			<div class="content">
 				<div class="signin-cont cont">
-					<form action="<%=request.getContextPath()%>/updatemember" method="post">
-             				<input type="hidden" name="memberid" value="${vo.memberid}">
-             				<input type="hidden" name="staff" value="${vo.staff}">
-	                    <label for="name">Your name</label>
-			   				<input type="text" name="name" id="name" class="inpt" required="required" value="${vo.name}">
-    				    <label for="password">Your password</label>
-	                    	<input type="password" name="password" id="password" class="inpt" required="required" value="${vo.password}">
-        			    <label for="phone">Your phone</label>
-        			    	<input type="text" name="phone" id="phone" class="inpt" required="required" value="${vo.phone}">
-					    <label for="age">Your age</label>
-        			    	<input type="number" name="age" id="age" class="inpt" required="required" value="${vo.age}">
-					    <label for="sex">Your Sex</label>
-					    	<% if(((MemberVO)request.getAttribute("vo")).getSex().equals("male")){ %>
-					    	<input type="radio" name="sex" value="male"  checked>남성
-					    	<input type="radio" name="sex" value="female">여성
-					    	<%} else { %>
-					    	<input type="radio" name="sex" value="male">남성
-					    	<input type="radio" name="sex" value="female" checked>여성
-					    	<%} %>
-	                    <div class="submit-wrap">
-	                        <input type="submit" value="Update" class="submit">
-		                </div>
-			        </form>
+					<label for="memberid">Your MemberID</label><br>
+			   			${vo.memberid}<br>
+	                <label for="name">Your name</label><br>
+			   			${vo.name}<br>
+        			<label for="phone">Your phone</label><br>
+        			    ${vo.phone}<br>
+					<label for="age">Your age</label><br>
+        			    ${vo.age}<br>
+					<label for="sex">Your Sex</label><br>
+					    ${vo.sex}<br>
+					<label for="reg_date">Your Register Date</label><br>
+					    ${vo.reg_date}<br>
+					<br><br><br>
+					<a href="<%=request.getContextPath()%>/updatemember?memberid=${vo.memberid}" class="submit">수정</a>
 				</div>
 			</div>
 		</article>

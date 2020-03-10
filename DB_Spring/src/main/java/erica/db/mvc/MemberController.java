@@ -91,7 +91,7 @@ public class MemberController {
 	
 	// Join 처리 진행
 	@RequestMapping(value = "join", method = RequestMethod.POST)
-	public String joinProcess(HttpServletResponse response ,MemberVO vo) {
+	public String joinProcess(HttpServletResponse response, MemberVO vo) {
 		// MemberID, Phone 중복 체크
 		int check = dao.checkJoin(vo);
 		
@@ -245,5 +245,23 @@ public class MemberController {
 	@RequestMapping("staffhotel")
 	public String hotel() {
 		return "staffhotel";
+	}
+	
+	// Print MyPage
+	@RequestMapping("mypage")
+	public ModelAndView mypage(String memberid) {
+		ModelAndView mv = new ModelAndView();
+		
+		// Client의 정보를 가져옴
+		MemberVO vo = dao.getOneMember(memberid);
+		System.out.println("Controller:\tGet One Member data");
+				
+		// 가져온 Client 정보를 Model로 넘겨줌
+		mv.addObject("vo", vo);
+		// View 지정
+		mv.setViewName("mypage");
+		System.out.println("Controller:\tPrint Member data to My Page");
+		
+		return mv;
 	}
 }

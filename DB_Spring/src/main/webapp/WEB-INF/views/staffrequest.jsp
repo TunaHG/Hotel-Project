@@ -66,8 +66,10 @@
 					<td>${request.roomno}</td>
 					<td>${request.content}</td>
 					<td>${request.ing}</td>
-					<td>${request.memberno}</td>
+					<td>${request.memberid}</td>
 					<td>${request.reg_date}</td>
+					<td><a href="<%=request.getContextPath()%>/updaterequest?reqno=${request.reqno}">수정</a></td>
+					<td><a href="<%=request.getContextPath()%>/deleterequest?reqno=${request.reqno}">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -79,6 +81,7 @@
 				<th>진행 상태</th>
 				<th>응대 직원</th>
 				<th>등록 일시</th>
+				<th colspan="2"><a href="<%=request.getContextPath()%>/insertrequest">추가</a></th>
 			</tr>
 		</tfoot>
 	</table>

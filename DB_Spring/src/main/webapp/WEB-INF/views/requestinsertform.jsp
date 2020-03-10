@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="erica.db.mvc.MemberVO" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 	crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding"
 	rel="stylesheet">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/uijo.hotel.css">
+<link rel="stylesheet" href="resources/css/uijo.hotel.css">
 <title>Update Client</title>
 <style>
 	body{background:url(resources/images/travel-3135436_640.jpg) repeat-x center top;}
@@ -48,31 +48,19 @@
 		<article class="half">
 			<h1>UIJO</h1>
 			<div class="tabs">
-				<span class="tab signin active">Update Member</span>
+				<span class="tab signin active">Insert Request</span>
 			</div>
 			<div class="content">
 				<div class="signin-cont cont">
-					<form action="<%=request.getContextPath()%>/updatemember" method="post">
-             				<input type="hidden" name="memberid" value="${vo.memberid}">
-             				<input type="hidden" name="staff" value="${vo.staff}">
-	                    <label for="name">Your name</label>
-			   				<input type="text" name="name" id="name" class="inpt" required="required" value="${vo.name}">
-    				    <label for="password">Your password</label>
-	                    	<input type="password" name="password" id="password" class="inpt" required="required" value="${vo.password}">
-        			    <label for="phone">Your phone</label>
-        			    	<input type="text" name="phone" id="phone" class="inpt" required="required" value="${vo.phone}">
-					    <label for="age">Your age</label>
-        			    	<input type="number" name="age" id="age" class="inpt" required="required" value="${vo.age}">
-					    <label for="sex">Your Sex</label>
-					    	<% if(((MemberVO)request.getAttribute("vo")).getSex().equals("male")){ %>
-					    	<input type="radio" name="sex" value="male"  checked>남성
-					    	<input type="radio" name="sex" value="female">여성
-					    	<%} else { %>
-					    	<input type="radio" name="sex" value="male">남성
-					    	<input type="radio" name="sex" value="female" checked>여성
-					    	<%} %>
+					<form action="<%=request.getContextPath()%>/insertrequest" method="post">
+	                    <label for="roomno">Your Room Number</label>
+	                    	<input type="text" id="roomno" name="roomno" class="inpt">
+    				    <label for="content">Request Content</label>
+    				    	<textarea rows="10" cols="40" name="content" id="content" class="inpt" required></textarea>
+        			    <label for="memberid">Response Staff ID</label>
+        			    	<input type="text" id="memberid" name="memberid" class="inpt">
 	                    <div class="submit-wrap">
-	                        <input type="submit" value="Update" class="submit">
+	                        <input type="submit" value="Insert" class="submit">
 		                </div>
 			        </form>
 				</div>

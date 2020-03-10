@@ -7,7 +7,7 @@ public class RequestVO {
 	private int roomno;
 	private String content;
 	private String ing;
-	private int memberno;
+	private String memberid;
 	private Timestamp reg_date;
 	
 	public int getReqno() {
@@ -34,11 +34,11 @@ public class RequestVO {
 	public void setIng(String ing) {
 		this.ing = ing;
 	}
-	public int getMemberno() {
-		return memberno;
+	public String getMemberid() {
+		return memberid;
 	}
-	public void setMemberno(int memberno) {
-		this.memberno = memberno;
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
 	}
 	public Timestamp getReg_date() {
 		return reg_date;

@@ -9,7 +9,7 @@
 	</select>
 	
 	<!-- Select one request record -->
-	<select id="onerequest" resultType="request" parameterType="request">
+	<select id="onerequest" resultType="request" parameterType="int">
 		SELECT * 
 		FROM request 
 		WHERE reqno = #{reqno}
@@ -18,18 +18,18 @@
 	<!-- Insert request record -->
 	<insert id="insertrequest" parameterType="request">
 		INSERT INTO request
-		VALUES(request_seq, #{roomno}, #{content}, #{ing}, #{memberno}, sysdate)
+		VALUES(request_seq, #{roomno}, #{content}, #{memberid}, sysdate)
 	</insert>
 	
 	<!-- Update request record -->
-	<update id="updaterequest">
+	<update id="updaterequest" parameterType="request">
 		UPDATE request 
-		SET roomno = #{roomno}, content = #{content}, memberno = #{memberno}, ing = #{ing} 
+		SET roomno = #{roomno}, content = #{content}, memberid = #{memberid}, ing = #{ing} 
 		WHERE reqno = #{reqno}
 	</update>
 	
 	<!-- Delete request record -->
-	<delete id="deleterequest">
+	<delete id="deleterequest" parameterType="int">
 		DELETE FROM request
 		WHERE reqno = #{reqno}
 	</delete>

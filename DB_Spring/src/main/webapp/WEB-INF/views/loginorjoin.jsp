@@ -33,9 +33,9 @@
 					<%if(session.getAttribute("member") == null){ %>
 					<a href="<%=request.getContextPath()%>/login">로그인</a>
 					<%} else { %>
+					<a href="<%=request.getContextPath()%>/mypage?memberid=${member.memberid}">마이페이지</a>
 					<a href="<%=request.getContextPath()%>/logout">로그아웃</a>
 					<%} %>
-					<a href="<%=request.getContextPath()%>/join">회원가입</a>
 				</div>
 				<div class="title">
 					<p>The Uijo Hotel</p>
